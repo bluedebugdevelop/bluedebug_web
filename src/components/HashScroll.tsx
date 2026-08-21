@@ -2,8 +2,13 @@
 
 import { useEffect } from "react";
 
-/** Cuánto insistimos, y cada cuánto, mientras Next termina de hidratar. */
-const INTENTOS = 8;
+/**
+ * Ventana durante la que insistimos en colocar la página. El primer intento
+ * suele bastar, pero si la hidratación se retrasa hace falta un segundo aviso.
+ * Los timers se estiran bastante durante la carga, así que el corte va por
+ * tiempo transcurrido y no por número de intentos.
+ */
+const VENTANA_MS = 1500;
 const INTERVALO_MS = 100;
 
 /**
@@ -11,16 +16,13 @@ const INTERVALO_MS = 100;
  * (por ejemplo /#metodo desde una página de portfolio).
  *
  * El salto que hace el navegador al cargar no sobrevive: llega antes de que
- * React hidrate y la hidratación devuelve la página arriba. Un par de frames
- * tampoco bastan, porque el reposicionamiento de Next llega después. Así que
- * insistimos durante un momento y paramos en cuanto el usuario toca el scroll,
- * para no pelearle el control.
+ * React hidrate y la hidratación devuelve la página arriba. Reposicionamos ya
+ * montados, y paramos en cuanto el visitante toca el scroll para no quitarle
+ * el control.
  */
 export default function HashScroll() {
   useEffect(() => {
     const { hash } = window.location;
-    // TEMPORAL: rastro para diagnosticar en produccion.
-    (window as any).__hs = { montado: true, hash, t0: Date.now(), pasos: [] as unknown[] };
     if (!hash || hash.length < 2) return;
 
     let destino: Element | null = null;
@@ -29,48 +31,35 @@ export default function HashScroll() {
     } catch {
       return; // hash que no es un selector válido
     }
-    (window as any).__hs.encontrado = !!destino;
     if (!destino) return;
 
     const seccion = destino;
+    const limite = Date.now() + VENTANA_MS;
     let temporizador = 0;
-    let intentos = 0;
 
-    const rendirse = () => {
+    const eventos = ["wheel", "touchstart", "keydown", "mousedown"] as const;
+
+    const parar = () => {
       window.clearTimeout(temporizador);
-      quitarEscuchas();
+      eventos.forEach((e) => window.removeEventListener(e, parar));
     };
 
     const colocar = () => {
       // Instantáneo a propósito: animar miles de píxeles no aporta nada.
-      const antes = Math.round(window.scrollY);
       seccion.scrollIntoView({ behavior: "instant", block: "start" });
-      (window as any).__hs.pasos.push({
-        ms: Date.now() - (window as any).__hs.t0,
-        antes,
-        despues: Math.round(window.scrollY),
-      });
-      if (++intentos < INTENTOS) {
+      if (Date.now() < limite) {
         temporizador = window.setTimeout(colocar, INTERVALO_MS);
       } else {
-        quitarEscuchas();
+        parar();
       }
     };
 
-    const eventos = ["wheel", "touchstart", "keydown"] as const;
-    function quitarEscuchas() {
-      eventos.forEach((e) => window.removeEventListener(e, rendirse));
-    }
     eventos.forEach((e) =>
-      window.addEventListener(e, rendirse, { passive: true, once: true }),
+      window.addEventListener(e, parar, { passive: true, once: true }),
     );
-
     temporizador = window.setTimeout(colocar, 0);
 
-    return () => {
-      window.clearTimeout(temporizador);
-      quitarEscuchas();
-    };
+    return parar;
   }, []);
 
   return null;
