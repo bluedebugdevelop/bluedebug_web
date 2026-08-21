@@ -220,6 +220,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* La navbar es fija (68px): sin esto el ancla queda debajo. */
+  scroll-padding-top: 84px;
 }
 
 body {

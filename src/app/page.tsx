@@ -1,3 +1,4 @@
+import HashScroll from "@/components/HashScroll";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/sections/Hero";
@@ -13,6 +14,7 @@ import Contact from "@/components/sections/Contact";
 export default function Home() {
   return (
     <>
+      <HashScroll />
       <Navbar />
       <main>
         <Hero />
