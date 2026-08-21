@@ -13,10 +13,10 @@ export const site = {
     federations: 2,
   },
   nav: [
-    { label: "El problema", href: "#problema" },
-    { label: "Qué hacemos", href: "#servicios" },
-    { label: "Método", href: "#metodo" },
-    { label: "Calculadora", href: "#calculadora" },
-    { label: "Trabajos", href: "#trabajos" },
+    { label: "El problema", href: "/#problema" },
+    { label: "Qué hacemos", href: "/#servicios" },
+    { label: "Método", href: "/#metodo" },
+    { label: "Calculadora", href: "/#calculadora" },
+    { label: "Trabajos", href: "/#trabajos" },
   ],
 } as const;

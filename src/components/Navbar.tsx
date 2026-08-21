@@ -59,7 +59,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <a
-            href="#contacto"
+            href="/#contacto"
             className="hidden text-[13px] font-semibold text-white transition-transform duration-150 sm:inline-flex"
             style={{ background: "var(--blue)", padding: "11px 20px" }}
             onMouseEnter={(e) => (e.currentTarget.style.background = "var(--ink)")}
@@ -99,7 +99,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="#contacto"
+              href="/#contacto"
               onClick={() => setOpen(false)}
               className="mt-4 mb-2 py-3 text-center text-[13px] font-semibold text-white"
               style={{ background: "var(--blue)" }}
