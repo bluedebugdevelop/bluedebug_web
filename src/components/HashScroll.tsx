@@ -2,13 +2,19 @@
 
 import { useEffect } from "react";
 
+/** Cuánto insistimos, y cada cuánto, mientras Next termina de hidratar. */
+const INTENTOS = 8;
+const INTERVALO_MS = 100;
+
 /**
  * Coloca la página en la sección del hash al entrar por un enlace profundo
  * (por ejemplo /#metodo desde una página de portfolio).
  *
- * El salto que hace el navegador al cargar se pierde: llega antes de que React
- * hidrate, y `scroll-behavior: smooth` lo convierte en una animación que la
- * hidratación cancela. Reposicionamos después, ya montados.
+ * El salto que hace el navegador al cargar no sobrevive: llega antes de que
+ * React hidrate y la hidratación devuelve la página arriba. Un par de frames
+ * tampoco bastan, porque el reposicionamiento de Next llega después. Así que
+ * insistimos durante un momento y paramos en cuanto el usuario toca el scroll,
+ * para no pelearle el control.
  */
 export default function HashScroll() {
   useEffect(() => {
@@ -23,14 +29,39 @@ export default function HashScroll() {
     }
     if (!destino) return;
 
-    // Dos frames: el primero cierra la hidratación, el segundo mide ya con el
-    // layout definitivo. Instantáneo a propósito, animar 3000px no aporta nada.
-    const frame = requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        destino.scrollIntoView({ behavior: "instant", block: "start" });
-      });
-    });
-    return () => cancelAnimationFrame(frame);
+    const seccion = destino;
+    let temporizador = 0;
+    let intentos = 0;
+
+    const rendirse = () => {
+      window.clearTimeout(temporizador);
+      quitarEscuchas();
+    };
+
+    const colocar = () => {
+      // Instantáneo a propósito: animar miles de píxeles no aporta nada.
+      seccion.scrollIntoView({ behavior: "instant", block: "start" });
+      if (++intentos < INTENTOS) {
+        temporizador = window.setTimeout(colocar, INTERVALO_MS);
+      } else {
+        quitarEscuchas();
+      }
+    };
+
+    const eventos = ["wheel", "touchstart", "keydown"] as const;
+    function quitarEscuchas() {
+      eventos.forEach((e) => window.removeEventListener(e, rendirse));
+    }
+    eventos.forEach((e) =>
+      window.addEventListener(e, rendirse, { passive: true, once: true }),
+    );
+
+    temporizador = window.setTimeout(colocar, 0);
+
+    return () => {
+      window.clearTimeout(temporizador);
+      quitarEscuchas();
+    };
   }, []);
 
   return null;
