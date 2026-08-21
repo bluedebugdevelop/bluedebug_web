@@ -19,6 +19,8 @@ const INTERVALO_MS = 100;
 export default function HashScroll() {
   useEffect(() => {
     const { hash } = window.location;
+    // TEMPORAL: rastro para diagnosticar en produccion.
+    (window as any).__hs = { montado: true, hash, t0: Date.now(), pasos: [] as unknown[] };
     if (!hash || hash.length < 2) return;
 
     let destino: Element | null = null;
@@ -27,6 +29,7 @@ export default function HashScroll() {
     } catch {
       return; // hash que no es un selector válido
     }
+    (window as any).__hs.encontrado = !!destino;
     if (!destino) return;
 
     const seccion = destino;
@@ -40,7 +43,13 @@ export default function HashScroll() {
 
     const colocar = () => {
       // Instantáneo a propósito: animar miles de píxeles no aporta nada.
+      const antes = Math.round(window.scrollY);
       seccion.scrollIntoView({ behavior: "instant", block: "start" });
+      (window as any).__hs.pasos.push({
+        ms: Date.now() - (window as any).__hs.t0,
+        antes,
+        despues: Math.round(window.scrollY),
+      });
       if (++intentos < INTENTOS) {
         temporizador = window.setTimeout(colocar, INTERVALO_MS);
       } else {
