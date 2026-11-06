@@ -20,7 +20,7 @@ const FACTS = [
 
 export default function Hero() {
   return (
-    <section className="blueprint relative overflow-hidden pt-[132px] pb-20 lg:pb-28">
+    <section className="relative overflow-hidden pt-[132px] pb-20 lg:pb-28">
       <div className="mx-auto grid w-[min(1180px,92vw)] items-center gap-14 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
         <div>
           <motion.div custom={0} variants={fade} initial="hidden" animate="show" className="mono" style={{ color: "var(--blue)" }}>

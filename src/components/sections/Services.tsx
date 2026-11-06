@@ -1,5 +1,3 @@
-import Reveal from "@/components/Reveal";
-
 type Service = {
   code: string;
   title: string;
@@ -43,31 +41,18 @@ export default function Services() {
       <div className="mx-auto w-[min(1180px,92vw)]">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <Reveal>
-              <span className="mono" style={{ color: "var(--blue)" }}>
-                02 — qué hacemos
-              </span>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="font-display mt-5 max-w-[18ch] text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.06] tracking-[-0.038em]">
-                Cuatro formas de quitar trabajo de en medio
-              </h2>
-            </Reveal>
+            <h2 className="font-display max-w-[18ch] text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.06] tracking-[-0.038em]">
+              Cuatro formas de quitar trabajo de en medio
+            </h2>
           </div>
-          <Reveal delay={0.1}>
-            <p className="mono max-w-[24ch] leading-[1.8]" style={{ color: "var(--ink-faint)" }}>
-              Casi siempre acaban siendo dos o tres a la vez
-            </p>
-          </Reveal>
+          <p className="mono max-w-[24ch] leading-[1.8]" style={{ color: "var(--ink-faint)" }}>
+            Casi siempre acaban siendo dos o tres a la vez
+          </p>
         </div>
 
         <div className="mt-14 grid gap-px md:grid-cols-3" style={{ background: "var(--line)" }}>
-          {SERVICES.map((service, i) => (
-            <Reveal
-              key={service.code}
-              delay={0.05 * i}
-              className={service.wide ? "md:col-span-2" : ""}
-            >
+          {SERVICES.map((service) => (
+            <div key={service.code} className={service.wide ? "md:col-span-2" : ""}>
               <article
                 className="group flex h-full flex-col p-8"
                 style={{ background: "var(--surface)" }}
@@ -93,7 +78,7 @@ export default function Services() {
                   ))}
                 </ul>
               </article>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>

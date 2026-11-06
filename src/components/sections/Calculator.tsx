@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import AreaChart, { Area } from "@/components/charts/area-chart";
 import Grid from "@/components/charts/grid";
 import XAxis from "@/components/charts/x-axis";
-import Reveal from "@/components/Reveal";
 
 const BASE_YEAR = 2026;
 
@@ -39,16 +38,9 @@ export default function Calculator() {
   return (
     <section id="calculadora" className="py-20 lg:py-28" style={{ borderTop: "1px solid var(--line)" }}>
       <div className="mx-auto w-[min(1180px,92vw)]">
-        <Reveal>
-          <span className="mono" style={{ color: "var(--blue)" }}>
-            04 — calculadora
-          </span>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="font-display mt-5 max-w-[20ch] text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.06] tracking-[-0.038em]">
-            Pon tus números y mira cuánto cuesta el trabajo manual
-          </h2>
-        </Reveal>
+        <h2 className="font-display max-w-[20ch] text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.06] tracking-[-0.038em]">
+          Pon tus números y mira cuánto cuesta el trabajo manual
+        </h2>
 
         <div className="mt-14 grid gap-px lg:grid-cols-[0.85fr_1.15fr]" style={{ background: "var(--line)" }}>
           {/* Controles */}

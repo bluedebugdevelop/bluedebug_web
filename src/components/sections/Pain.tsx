@@ -1,5 +1,3 @@
-import Reveal from "@/components/Reveal";
-
 const COSTS = [
   {
     figure: "1 de cada 5",
@@ -27,27 +25,18 @@ export default function Pain() {
   return (
     <section id="problema" className="py-20 lg:py-28">
       <div className="mx-auto w-[min(1180px,92vw)]">
-        <Reveal>
-          <span className="mono" style={{ color: "var(--signal)" }}>
-            01 — el problema
-          </span>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="font-display mt-5 max-w-[22ch] text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.06] tracking-[-0.038em]">
-            Lo que se hace a mano no es gratis. Sólo es invisible.
-          </h2>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <p className="mt-6 max-w-[46ch] text-[1.02rem] leading-[1.7]" style={{ color: "var(--ink-soft)" }}>
-            Nadie apunta en ninguna parte las horas que se van en tareas que
-            podría hacer una máquina. Por eso nunca aparecen en la cuenta de
-            resultados, y por eso nunca se arreglan.
-          </p>
-        </Reveal>
+        <h2 className="font-display max-w-[22ch] text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.06] tracking-[-0.038em]">
+          Lo que se hace a mano no es gratis. Sólo es invisible.
+        </h2>
+        <p className="mt-6 max-w-[46ch] text-[1.02rem] leading-[1.7]" style={{ color: "var(--ink-soft)" }}>
+          Nadie apunta en ninguna parte las horas que se van en tareas que
+          podría hacer una máquina. Por eso nunca aparecen en la cuenta de
+          resultados, y por eso nunca se arreglan.
+        </p>
 
         <div className="mt-14 grid gap-px sm:grid-cols-2" style={{ background: "var(--line)" }}>
-          {COSTS.map((cost, i) => (
-            <Reveal key={cost.figure} delay={0.05 * i}>
+          {COSTS.map((cost) => (
+            <div key={cost.figure}>
               <div className="h-full p-8" style={{ background: "var(--paper)" }}>
                 <div
                   className="font-display text-[2rem] font-extrabold tracking-[-0.04em]"
@@ -62,7 +51,7 @@ export default function Pain() {
                   {cost.text}
                 </p>
               </div>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>

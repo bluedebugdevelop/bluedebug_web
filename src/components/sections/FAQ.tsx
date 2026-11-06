@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import Reveal from "@/components/Reveal";
 
 const QUESTIONS = [
   {
@@ -41,16 +40,9 @@ export default function FAQ() {
     >
       <div className="mx-auto grid w-[min(1180px,92vw)] gap-12 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
-          <Reveal>
-            <span className="mono" style={{ color: "var(--blue)" }}>
-              06 — dudas
-            </span>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="font-display mt-5 text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.06] tracking-[-0.038em]">
-              Lo que nos preguntan siempre
-            </h2>
-          </Reveal>
+          <h2 className="font-display text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.06] tracking-[-0.038em]">
+            Lo que nos preguntan siempre
+          </h2>
         </div>
 
         <div style={{ borderTop: "1px solid var(--line-strong)" }}>

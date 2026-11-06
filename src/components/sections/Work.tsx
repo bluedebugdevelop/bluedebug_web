@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { apps } from "@/data/apps";
-import Reveal from "@/components/Reveal";
 
 export default function Work() {
   return (
@@ -9,27 +8,18 @@ export default function Work() {
       <div className="mx-auto w-[min(1180px,92vw)]">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <Reveal>
-              <span className="mono" style={{ color: "var(--signal)" }}>
-                05 — trabajos
-              </span>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="font-display mt-5 max-w-[20ch] text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.06] tracking-[-0.038em]">
-                Cosas que hemos construido y están funcionando
-              </h2>
-            </Reveal>
+            <h2 className="font-display max-w-[20ch] text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.06] tracking-[-0.038em]">
+              Cosas que hemos construido y están funcionando
+            </h2>
           </div>
-          <Reveal delay={0.1}>
-            <p className="mono max-w-[26ch] leading-[1.8]" style={{ color: "var(--ink-faint)" }}>
-              Nada de maquetas: apps publicadas, con usuarios dentro
-            </p>
-          </Reveal>
+          <p className="mono max-w-[26ch] leading-[1.8]" style={{ color: "var(--ink-faint)" }}>
+            Nada de maquetas: apps publicadas, con usuarios dentro
+          </p>
         </div>
 
         <div className="mt-14 grid gap-px sm:grid-cols-2 lg:grid-cols-4" style={{ background: "var(--line)" }}>
-          {apps.map((app, i) => (
-            <Reveal key={app.slug} delay={0.06 * i}>
+          {apps.map((app) => (
+            <div key={app.slug}>
               <Link
                 href={`/portfolio/${app.slug}`}
                 className="group flex h-full flex-col"
@@ -82,7 +72,7 @@ export default function Work() {
                   </ul>
                 </div>
               </Link>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>

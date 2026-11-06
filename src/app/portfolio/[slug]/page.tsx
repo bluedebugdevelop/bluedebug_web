@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Reveal from "@/components/Reveal";
 import { apps, getApp } from "@/data/apps";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -40,7 +39,7 @@ export default async function AppDetail({ params }: Params) {
     <>
       <Navbar />
       <main>
-        <section className="blueprint pt-[132px] pb-16">
+        <section className="pt-[132px] pb-16">
           <div className="mx-auto w-[min(1180px,92vw)]">
             <Link href="/#trabajos" className="mono" style={{ color: "var(--blue)" }}>
               ⟵ volver a trabajos
@@ -131,7 +130,7 @@ export default async function AppDetail({ params }: Params) {
                 style={{ background: "var(--line)" }}
               >
                 {app.images.map((image, i) => (
-                  <Reveal key={image} delay={0.03 * i}>
+                  <div key={image}>
                     <div
                       className={`relative ${
                         app.orientation === "landscape" ? "aspect-[16/10]" : "aspect-[9/16]"
@@ -154,7 +153,7 @@ export default async function AppDetail({ params }: Params) {
                         }
                       />
                     </div>
-                  </Reveal>
+                  </div>
                 ))}
               </div>
             </div>

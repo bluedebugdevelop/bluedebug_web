@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Reveal from "@/components/Reveal";
 
 type Entity = {
   src: string;
@@ -49,14 +48,12 @@ export default function Trust() {
   return (
     <section style={{ borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)" }}>
       <div className="mx-auto w-[min(1180px,92vw)] py-10">
-        <Reveal>
-          <p className="mono" style={{ color: "var(--ink-faint)" }}>
-            Dónde está funcionando lo que hacemos
-          </p>
-        </Reveal>
+        <p className="mono" style={{ color: "var(--ink-faint)" }}>
+          Dónde está funcionando lo que hacemos
+        </p>
 
         <div className="mt-7 grid gap-px sm:grid-cols-2 lg:grid-cols-4" style={{ background: "var(--line)" }}>
-          {ENTITIES.map((entity, i) => {
+          {ENTITIES.map((entity) => {
             const inner = (
               <>
                 <Image
@@ -84,7 +81,7 @@ export default function Trust() {
             const style = { background: "var(--paper)" };
 
             return (
-              <Reveal key={entity.name} delay={0.05 * i}>
+              <div key={entity.name}>
                 {entity.external ? (
                   <a
                     href={entity.href}
@@ -100,7 +97,7 @@ export default function Trust() {
                     {inner}
                   </Link>
                 )}
-              </Reveal>
+              </div>
             );
           })}
         </div>

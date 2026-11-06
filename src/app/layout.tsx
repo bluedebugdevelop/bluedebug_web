@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Archivo, IBM_Plex_Mono } from "next/font/google";
+import { Inter, Bricolage_Grotesque, IBM_Plex_Mono } from "next/font/google";
 import { site } from "@/lib/site-config";
 import "./globals.css";
 
@@ -9,10 +9,11 @@ const body = Inter({
   display: "swap",
 });
 
-const display = Archivo({
+// Titulares: grotesca con carácter. Inter queda solo para texto corrido.
+const display = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["600", "700", "800", "900"],
-  variable: "--font-display",
+  axes: ["opsz"],
+  variable: "--font-bricolage",
   display: "swap",
 });
 
