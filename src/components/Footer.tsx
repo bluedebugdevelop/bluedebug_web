@@ -41,7 +41,9 @@ export default function Footer() {
               Secciones
             </div>
             <ul className="flex flex-col gap-2.5">
-              {site.nav.map((item) => (
+              {site.nav
+                .filter((item) => item.href !== "/automatizacion-de-procesos")
+                .map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
@@ -52,6 +54,15 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/automatizacion-de-procesos"
+                  className="text-[13.5px]"
+                  style={{ color: "var(--ink-soft)" }}
+                >
+                  Automatización de procesos
+                </Link>
+              </li>
             </ul>
           </div>
 

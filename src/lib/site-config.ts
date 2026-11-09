@@ -13,6 +13,7 @@ export const site = {
   nav: [
     { label: "El problema", href: "/#problema" },
     { label: "Qué hacemos", href: "/#servicios" },
+    { label: "Automatización", href: "/automatizacion-de-procesos" },
     { label: "Método", href: "/#metodo" },
     { label: "Calculadora", href: "/#calculadora" },
     { label: "Trabajos", href: "/#trabajos" },
