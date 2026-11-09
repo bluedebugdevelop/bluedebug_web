@@ -25,6 +25,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description: app.description,
       images: [{ url: app.coverImage }],
     },
+    // Without this the layout's twitter title and description leak into every card.
+    twitter: {
+      card: "summary_large_image",
+      title: `${app.name} — ${app.tagline}`,
+      description: app.description,
+      images: [app.coverImage],
+    },
   };
 }
 
