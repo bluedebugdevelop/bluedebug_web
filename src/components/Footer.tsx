@@ -18,7 +18,7 @@ export default function Footer() {
                 className="h-8 w-8 object-contain"
               />
               <span className="font-display text-[20px] font-extrabold tracking-[-0.04em]">
-                Bluedebug
+                BlueDebug
               </span>
             </div>
             <p
@@ -41,7 +41,9 @@ export default function Footer() {
               Secciones
             </div>
             <ul className="flex flex-col gap-2.5">
-              {site.nav.map((item) => (
+              {site.nav
+                .filter((item) => item.href !== "/automatizacion-de-procesos")
+                .map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
@@ -52,6 +54,15 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/automatizacion-de-procesos"
+                  className="text-[13.5px]"
+                  style={{ color: "var(--ink-soft)" }}
+                >
+                  Automatización de procesos
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -80,9 +91,9 @@ export default function Footer() {
           style={{ borderTop: "1px solid var(--line)", color: "var(--ink-faint)" }}
         >
           <span>
-            © {new Date().getFullYear()} Bluedebug — Automatización de procesos
+            © {new Date().getFullYear()} BlueDebug — Automatización de procesos
           </span>
-          <span>Hecho en España</span>
+          <span>Hecho en Gijón, Asturias</span>
         </div>
       </div>
     </footer>

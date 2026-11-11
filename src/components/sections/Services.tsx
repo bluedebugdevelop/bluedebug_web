@@ -4,6 +4,7 @@ type Service = {
   text: string;
   examples: string[];
   wide?: boolean;
+  href?: string;
 };
 
 const SERVICES: Service[] = [
@@ -13,6 +14,7 @@ const SERVICES: Service[] = [
     text: "Todo lo que alguien hace cada semana siguiendo siempre los mismos pasos es candidato. Lo replicamos en un sistema que corre solo y avisa cuando algo se sale del guion.",
     examples: ["Facturas", "Altas de cliente", "Informes", "Avisos"],
     wide: true,
+    href: "/automatizacion-de-procesos",
   },
   {
     code: "S-02",
@@ -66,6 +68,15 @@ export default function Services() {
                 <p className="mt-3 text-[0.95rem] leading-[1.65]" style={{ color: "var(--ink-soft)" }}>
                   {service.text}
                 </p>
+                {service.href && (
+                  <a
+                    href={service.href}
+                    className="mt-5 text-[0.9rem] font-semibold underline-offset-4 hover:underline"
+                    style={{ color: "var(--blue)" }}
+                  >
+                    Ver automatización de procesos ⟶
+                  </a>
+                )}
                 <ul className="mono mt-6 flex flex-wrap gap-2 pt-5" style={{ borderTop: "1px solid var(--line)" }}>
                   {service.examples.map((example) => (
                     <li

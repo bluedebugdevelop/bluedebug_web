@@ -25,6 +25,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description: app.description,
       images: [{ url: app.coverImage }],
     },
+    // Without this the layout's twitter title and description leak into every card.
+    twitter: {
+      card: "summary_large_image",
+      title: `${app.name} — ${app.tagline}`,
+      description: app.description,
+      images: [app.coverImage],
+    },
   };
 }
 
@@ -112,6 +119,15 @@ export default async function AppDetail({ params }: Params) {
             <p className="max-w-[68ch] text-[1.02rem] leading-[1.8]" style={{ color: "var(--ink-soft)" }}>
               {app.longDescription}
             </p>
+            {app.slug === "club-voleibol-oviedo" && (
+              <Link
+                href="/automatizacion-de-procesos"
+                className="text-[0.95rem] font-semibold underline underline-offset-4 hover:no-underline lg:col-start-2"
+                style={{ color: "var(--blue)" }}
+              >
+                Así trabajamos la automatización de procesos ⟶
+              </Link>
+            )}
           </div>
         </section>
 

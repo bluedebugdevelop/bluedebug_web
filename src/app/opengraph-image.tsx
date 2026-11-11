@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "Bluedebug — El trabajo manual que sobra, fuera";
+export const alt = "BlueDebug — El trabajo manual que sobra, fuera";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -48,7 +48,7 @@ export default async function Image() {
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={logoSrc} width={64} height={64} alt="" />
-          <span style={{ fontSize: 40, fontWeight: 800, letterSpacing: "-0.04em" }}>Bluedebug</span>
+          <span style={{ fontSize: 40, fontWeight: 800, letterSpacing: "-0.04em" }}>BlueDebug</span>
         </div>
 
         <div
@@ -87,7 +87,7 @@ export default async function Image() {
             paddingTop: 24,
           }}
         >
-          <span>Automatización de procesos para empresas</span>
+          <span>Automatización de procesos y software a medida en Gijón</span>
           <span style={{ color: "#0B6EB4" }}>bluedebug.com</span>
         </div>
       </div>
